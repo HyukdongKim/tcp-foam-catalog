@@ -1,6 +1,6 @@
 # 열거된 TCP 구조 전체의 등부피 거품 면적 (한국어 요약)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24053853.svg)](https://doi.org/10.5281/zenodo.24053853)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24053852.svg)](https://doi.org/10.5281/zenodo.24053852)
 
 **요약.** 셀 부피가 모두 같은 주기 거품의 최소 막 면적(켈빈 문제)을 계산했습니다. 대상은 Dutour Sikirić 등이
 컴퓨터로 열거한 TCP 구조 121종과 합금 구조 9종이고, 중복을 빼면 서로 다른 위상 125종입니다.
@@ -47,6 +47,7 @@
 
 Hyukdong Kim, *Equal-volume foam costs of all enumerated TCP structures, and the N56 foam*, v1.0.0, Zenodo (2026),
 doi:[10.5281/zenodo.24053853](https://doi.org/10.5281/zenodo.24053853).
+모든 버전을 통틀어 인용하려면(항상 최신 버전으로 연결) doi:[10.5281/zenodo.24053852](https://doi.org/10.5281/zenodo.24053852)를 쓰세요.
 
 ## 라이선스
 

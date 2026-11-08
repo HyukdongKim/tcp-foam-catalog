@@ -1,6 +1,6 @@
 # Equal-volume foam costs of all enumerated TCP structures
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24053853.svg)](https://doi.org/10.5281/zenodo.24053853)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24053852.svg)](https://doi.org/10.5281/zenodo.24053852)
 
 **Short version.** We computed the minimal surface area of equal-volume periodic foams (the Kelvin problem)
 for every tetrahedrally close-packed (TCP) structure enumerated by Dutour Sikirić, Delgado-Friedrichs and Deza
@@ -98,7 +98,9 @@ code here and can be reproduced with it.
 ## Citation
 
 Hyukdong Kim, *Equal-volume foam costs of all enumerated TCP structures, and the N56 foam*, v1.0.0, Zenodo (2026),
-doi:[10.5281/zenodo.24053853](https://doi.org/10.5281/zenodo.24053853). Also see [CITATION.cff](CITATION.cff).
+doi:[10.5281/zenodo.24053853](https://doi.org/10.5281/zenodo.24053853).
+To cite all versions (always resolves to the latest), use doi:[10.5281/zenodo.24053852](https://doi.org/10.5281/zenodo.24053852).
+Also see [CITATION.cff](CITATION.cff).
 
 ## References
 

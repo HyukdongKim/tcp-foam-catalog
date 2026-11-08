@@ -4,7 +4,14 @@ title: "Equal-volume foam costs of all enumerated TCP structures, and the N56 fo
 authors:
   - name: "Hyukdong Kim"
 version: 1.0.0
-doi: 10.5281/zenodo.24053853
+doi: 10.5281/zenodo.24053852
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24053852
+    description: "Concept DOI, all versions (resolves to the latest)"
+  - type: doi
+    value: 10.5281/zenodo.24053853
+    description: "Version 1.0.0"
 date-released: 2026-11-08
 license: [MIT, CC-BY-4.0]
 repository-code: "https://github.com/HyukdongKim/tcp-foam-catalog"
