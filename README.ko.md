@@ -1,5 +1,7 @@
 # 열거된 TCP 구조 전체의 등부피 거품 면적 (한국어 요약)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24053853.svg)](https://doi.org/10.5281/zenodo.24053853)
+
 **요약.** 셀 부피가 모두 같은 주기 거품의 최소 막 면적(켈빈 문제)을 계산했습니다. 대상은 Dutour Sikirić 등이
 컴퓨터로 열거한 TCP 구조 121종과 합금 구조 9종이고, 중복을 빼면 서로 다른 위상 125종입니다.
 웨이어–펠란(A15)이 여전히 가장 낮습니다. 2위는 실제 합금에서 알려지지 않은 열거 구조 **N56**으로, 비용이
@@ -40,6 +42,11 @@
 
 코드와 계산은 저자의 지시 아래 AI 도구(Anthropic의 Claude)의 도움을 받아 만들었고, 내용에 대한 책임은
 저자에게 있습니다. 모든 수치는 이 저장소의 코드로 재현할 수 있습니다.
+
+## 인용
+
+Hyukdong Kim, *Equal-volume foam costs of all enumerated TCP structures, and the N56 foam*, v1.0.0, Zenodo (2026),
+doi:[10.5281/zenodo.24053853](https://doi.org/10.5281/zenodo.24053853).
 
 ## 라이선스
 
