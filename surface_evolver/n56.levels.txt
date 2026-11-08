@@ -1,0 +1,14 @@
+Enter command: procedure settle() {
+more>   printf "  settle iterations %d\n", it;
+Enter command: settle(); report(0);
+  settle iterations 80
+LEVEL 0 facets 2616 cost 5.2959455370 maxVolErr 4.4e-14
+Enter command: r; settle(); report(1);
+  settle iterations 80
+LEVEL 1 facets 10464 cost 5.2944736373 maxVolErr 4.2e-14
+Enter command: r; settle(); report(2);
+  settle iterations 80
+LEVEL 2 facets 41856 cost 5.2941165970 maxVolErr 6.3e-14
+Enter command: r; settle(); report(3);
+  settle iterations 80
+LEVEL 3 facets 167424 cost 5.2940291908 maxVolErr 5.6e-14

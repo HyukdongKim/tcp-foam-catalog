@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use these data or code, please cite them as below, and cite the space-fullerene enumeration (references)."
+title: "Equal-volume foam costs of all enumerated TCP structures, and the N56 foam"
+authors:
+  - name: "Hyukdong Kim"
+date-released: 2026-11-08
+license: [MIT, CC-BY-4.0]
+repository-code: "https://github.com/HyukdongKim/tcp-foam-catalog"
+keywords: [Kelvin problem, foam, Weaire-Phelan, Frank-Kasper, tetrahedrally close-packed, Surface Evolver]
+references:
+  - type: article
+    authors: [{family-names: "Dutour Sikirić", given-names: "Mathieu"}, {family-names: "Delgado-Friedrichs", given-names: "Olaf"}, {family-names: "Deza", given-names: "Michel"}]
+    title: "Space fullerenes: a computer search for new Frank-Kasper structures"
+    journal: "Acta Crystallographica Section A"
+    volume: 66
+    start: 602
+    end: 615
+    year: 2010
+    doi: 10.1107/S0108767310022932
+  - type: article
+    authors: [{family-names: "Dutour Sikirić", given-names: "Mathieu"}, {family-names: "Deza", given-names: "Michel"}]
+    title: "Space fullerenes: computer search for new Frank-Kasper structures II"
+    journal: "Structural Chemistry"
+    volume: 23
+    start: 1103
+    end: 1114
+    year: 2012
+    doi: 10.1007/s11224-012-0005-3
+  - type: dataset
+    authors: [{family-names: "Dutour Sikirić", given-names: "Mathieu"}]
+    title: "Dataset and programs for the work on space-fullerenes"
+    publisher: {name: Zenodo}
+    url: "https://zenodo.org/records/13691342"
