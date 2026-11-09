@@ -118,9 +118,9 @@ code here and can be reproduced with it.
 
 ## Citation
 
-Hyukdong Kim, *Equal-volume foam costs of all enumerated TCP structures, and the N56 foam*, Zenodo (2026). v1.1.0:
-doi:[10.5281/zenodo.24080149](https://doi.org/10.5281/zenodo.24080149)
-(v1.0.0: doi:[10.5281/zenodo.24053853](https://doi.org/10.5281/zenodo.24053853)).
+Hyukdong Kim, *Equal-volume foam costs of all enumerated TCP structures, and the N56 foam*, Zenodo (2026). v1.2.0:
+doi:[10.5281/zenodo.24082492](https://doi.org/10.5281/zenodo.24082492)
+(v1.1.0: doi:[10.5281/zenodo.24080149](https://doi.org/10.5281/zenodo.24080149); v1.0.0: doi:[10.5281/zenodo.24053853](https://doi.org/10.5281/zenodo.24053853)).
 To cite all versions (always resolves to the latest), use doi:[10.5281/zenodo.24053852](https://doi.org/10.5281/zenodo.24053852).
 Also see [CITATION.cff](CITATION.cff).
 
