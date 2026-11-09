@@ -52,8 +52,9 @@
 
 ## 인용
 
-Hyukdong Kim, *Equal-volume foam costs of all enumerated TCP structures, and the N56 foam*, v1.0.0, Zenodo (2026),
-doi:[10.5281/zenodo.24053853](https://doi.org/10.5281/zenodo.24053853).
+Hyukdong Kim, *Equal-volume foam costs of all enumerated TCP structures, and the N56 foam*, v1.1.0, Zenodo (2026),
+doi:[10.5281/zenodo.24080149](https://doi.org/10.5281/zenodo.24080149)
+(v1.0.0: doi:[10.5281/zenodo.24053853](https://doi.org/10.5281/zenodo.24053853)).
 모든 버전을 통틀어 인용하려면(항상 최신 버전으로 연결) doi:[10.5281/zenodo.24053852](https://doi.org/10.5281/zenodo.24053852)를 쓰세요.
 
 ## 라이선스
