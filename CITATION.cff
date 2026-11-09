@@ -3,7 +3,7 @@ message: "If you use these data or code, please cite them as below, and cite the
 title: "Equal-volume foam costs of all enumerated TCP structures, and the N56 foam"
 authors:
   - name: "Hyukdong Kim"
-version: 1.1.0
+version: 1.2.0
 doi: 10.5281/zenodo.24053852
 identifiers:
   - type: doi

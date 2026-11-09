@@ -60,7 +60,7 @@ The two programs differ by at most 3e-5 after extrapolation. The N56 − σ gap 
 
 ### 4.2 Catalogue
 
-See `data/tcp_foam_catalog.csv` and `figures/tcp_cost_vs_faces.png` (the figure shows the 125 v1.0 topologies). The first ten distinct topologies (v1.1, 128 topologies):
+See `data/tcp_foam_catalog.csv` and `figures/tcp_cost_vs_faces.png` (the figure shows the 125 v1.0 topologies). The first ten distinct topologies (v1.2, 130 topologies; P is 12th at 5.30397, see §10):
 
 | # | Structure | Source | Space group | Cells | Z12 : Z14 : Z15 : Z16 | c∞ |
 |---|---|---|---|---|---|---|
@@ -186,3 +186,46 @@ Z̄ = 13.333 (C15 family, 5.32421), 13.467 (σ, 5.29421) and 13.5 (A15, 5.28833)
 it (N56 +0.0011, K +0.0003). Structures with Z̄ between σ and A15 are A15/σ intergrowths such as N56, and their
 position above the hull indicates a positive interface cost. A larger TCP would have to fall well below this hull to
 beat WP. This is an empirical trend, not a proof.
+
+## 10. Additions in v1.2
+
+### 10.1 R and P phases from crystal structures
+
+Crystal structures from the Crystallography Open Database (`data/source_cif/`, COD 2310299: R phase Mo–Co–Cr,
+Komura, Sly & Shoemaker, Acta Cryst. 13 (1960) 575; COD 2310312 and 2311049: P phase Mo–Ni–Cr, Shoemaker &
+Shoemaker, Acta Cryst. 8 (1955) 734) are built with `code/cif_build.py`: every site is a cell centre and the
+topology is the Voronoi topology of the sites (periodic Delaunay, `trifoam.from_delaunay`), accepted only if it is
+TCP. R is reduced to its primitive rhombohedral cell (53 sites). The two P-phase files give the same topology
+(Weisfeiler–Lehman hash); neither phase duplicates any of the 128 earlier topologies. Relaxation as in §9.1
+(`python code/shoemaker_run.py 2 data/tcp_cif.json rerun/cif_phases.jsonl`, archived `results/cif_phases.jsonl`).
+
+| Structure | Cells | mean faces | r = 2 | r = 3 | c∞ | above hull |
+|---|---|---|---|---|---|---|
+| P | 56 | 13.4286 | 5.304369 | 5.304146 | 5.30397 | +0.0012 |
+| R | 53 | 13.3962 | 5.313064 | 5.312869 | 5.31271 | +0.0027 |
+
+P is the lowest of all structures with mean faces 13.4286 (E09 was 5.30479) and 12th overall; 14 of the 130
+distinct topologies now beat Kelvin's foam. R is above Kelvin. Both lie above the hull of §9.3. COD had no X or M
+phase usable here.
+
+### 10.2 Exhaustive T1 enumeration to depth 5
+
+`code/t1_deep.py` repeats the triangle-free search of §9.2 with two changes: duplicates are detected with a
+Weisfeiler–Lehman hash of the quotient graph (cells as nodes, edges labelled by polygon size), which is finer than
+the fingerprint of §9.2; and the breadth-first enumeration runs in parallel with compressed states, so no state cap
+was needed. The §9.2 fingerprint had merged distinct topologies (WP 2×1×1, depth 3: 8 triangle-free topologies
+there, 17 here), though the best values are unchanged. Results: `results/t1/t1d_*.jsonl.gz` (r = 1, box relaxed).
+
+| Start | depth | states at depth 3 / 4 | triangle-free (by depth) | best Δ (r = 1) | Δ × N |
+|---|---|---|---|---|---|
+| WP 1×1×1 | 5 | 3,188 / 81,892 | 35 (d3 6, d4 6, d5 23) | +0.0264 | 0.21 |
+| WP 2×1×1 | 4 | 22,469 / – | 35 (d3 17, d4 18) | +0.0137 | 0.22 |
+| WP 2×2×1 | 3 | – | 17 | +0.0073 | 0.23 |
+| σ 1×1×1 | 3 | – | 61 | +0.0065 | 0.19 |
+
+Every relaxation was valid. Depth-4 and depth-5 topologies (including 7- and 8-gon faces) are all worse than the
+minimal depth-3 defect (five 4-gons, about +0.2 per defect), and no triangle-free topology is below its start. WP is
+lower than every triangle-free topology within five T1 moves in its 8-cell cell, four in the 16-cell cell and three
+in the 32-cell cell; σ is lower than every one within three. Limits: the WL hash can in principle merge
+non-isomorphic topologies; cell number is fixed; values are r = 1 (all Δ are far above the r = 1 bias of about
+0.002, and no candidate needed re-checking at higher resolution).

@@ -1,5 +1,6 @@
-"""r=2,3 relaxation of data/tcp_shoemaker.json with the settings of catalog.py -> rerun/shoemaker_phases.jsonl
-(archived output: results/shoemaker_phases.jsonl). usage: python code/shoemaker_run.py [workers=2]"""
+"""r=2,3 relaxation of extra TCP records with the settings of catalog.py.
+usage: python code/shoemaker_run.py [workers=2] [input=data/tcp_shoemaker.json] [output=rerun/shoemaker_phases.jsonl]
+Archived outputs: results/shoemaker_phases.jsonl (data/tcp_shoemaker.json), results/cif_phases.jsonl (data/tcp_cif.json)."""
 import json, os, sys, time, warnings
 import numpy as np
 from multiprocessing import Pool
@@ -32,7 +33,9 @@ def job(a):
 if __name__ == '__main__':
     nw = int(sys.argv[1]) if len(sys.argv) > 1 else 2
     os.chdir(os.path.join(HERE, '..')); os.makedirs('rerun', exist_ok=True)
-    recs = sorted(json.load(open('data/tcp_shoemaker.json')), key=lambda x: x['N'])
-    with Pool(nw) as p, open('rerun/shoemaker_phases.jsonl', 'a') as f:
+    src = sys.argv[2] if len(sys.argv) > 2 else 'data/tcp_shoemaker.json'
+    dst = sys.argv[3] if len(sys.argv) > 3 else 'rerun/shoemaker_phases.jsonl'
+    recs = sorted(json.load(open(src)), key=lambda x: x['N'])
+    with Pool(nw) as p, open(dst, 'a') as f:
         for res in p.imap_unordered(job, [(x, r) for r in (2, 3) for x in recs]):
             f.write(json.dumps(res) + '\n'); f.flush(); print(res, flush=True)
