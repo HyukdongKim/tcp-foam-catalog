@@ -60,20 +60,20 @@ The two programs differ by at most 3e-5 after extrapolation. The N56 − σ gap 
 
 ### 4.2 Catalogue
 
-See `data/tcp_foam_catalog.csv` and `figures/tcp_cost_vs_faces.png`. The first ten distinct topologies:
+See `data/tcp_foam_catalog.csv` and `figures/tcp_cost_vs_faces.png` (the figure shows the 125 v1.0 topologies). The first ten distinct topologies (v1.1, 128 topologies):
 
 | # | Structure | Source | Space group | Cells | Z12 : Z14 : Z15 : Z16 | c∞ |
 |---|---|---|---|---|---|---|
 | 1 | A15 (Weaire–Phelan) | 2010 Phys27 | Pm-3n | 8 | 2 : 6 : 0 : 0 | 5.28835 |
 | 2 | **N56** | 2010 | I4₁/amd | 76 | 24 : 44 : 8 : 0 | 5.29403 |
 | 3 | σ | 2010 Phys26 | P4₂/mnm | 30 | 10 : 16 : 4 : 0 | 5.29421 |
-| 4 | Phys25 | 2010 | Cmmm | 30 | 10 : 16 : 4 : 0 | 5.29550 |
-| 5 | E11 | 2010 | I4₁/amd | 44 | 16 : 20 : 8 : 0 | 5.29821 |
-| 6 | ν (MnSi) | alloy | Immm | 186 | 74 : 80 : 20 : 12 | 5.30141 |
-| 7 | N53 | 2010 | P4₂/mmc | 36 | 14 : 14 : 8 : 0 | 5.30152 |
-| 8 | N54 | 2010 | P4₂/mmc | 36 | 14 : 16 : 4 : 2 | 5.30184 |
-| 9 | E09 | 2010 | Cmc2₁ | 56 | 24 : 20 : 8 : 4 | 5.30479 |
-| 10 | Struct21 | 2012 | Cmmm | 42 | 18 : 16 : 4 : 4 | 5.30518 |
+| 4 | K (Shoemaker), v1.1 | dataset `SpecialStructure` | Pmmm | 82 | 28 : 42 : 12 : 0 | 5.29525 |
+| 5 | Phys25 | 2010 | Cmmm | 30 | 10 : 16 : 4 : 0 | 5.29550 |
+| 6 | F (Shoemaker), v1.1 | dataset `SpecialStructure` | P6/mmm | 52 | 18 : 26 : 8 : 0 | 5.29584 |
+| 7 | E11 | 2010 | I4₁/amd | 44 | 16 : 20 : 8 : 0 | 5.29821 |
+| 8 | J (Shoemaker), v1.1 | dataset `SpecialStructure` | Pmmm | 22 | 8 : 10 : 4 : 0 | 5.29904 |
+| 9 | ν (MnSi) | alloy | Immm | 186 | 74 : 80 : 20 : 12 | 5.30141 |
+| 10 | N53 | 2010 | P4₂/mmc | 36 | 14 : 14 : 8 : 0 | 5.30152 |
 
 Extrapolation uncertainty is about ±5e-5 for the 22 structures run to r = 4, and up to ±1.3e-4 for the others
 (the largest difference between the r2–3 and r2–4 estimates). The same topology given in two different files
@@ -101,7 +101,7 @@ enumerated structures. We could not check unpublished data.
 
 ## 7. Limitations
 
-1. All values are for fixed topology, with no T1 moves. Structures above about 5.40 fill space correctly but are
+1. All catalogue values are for fixed topology. Section 9.2 tests T1 neighbours of WP, σ and N56. Structures above about 5.40 fill space correctly but are
    probably T1-unstable.
 2. In Surface Evolver the periods were fixed, not optimised. A relaxed box can only lower the value.
 3. Every Surface Evolver level stopped at the 80-round cap, so its values are slight upper bounds. N56 has more
@@ -122,3 +122,65 @@ enumerated structures. We could not check unpublished data.
 
 Archived outputs: `results/` (`tcp_r1`, `tcp_r2`, `tcp_verify` for r = 3, `rigor`, `catalog`) and
 `surface_evolver/*.levels.txt`. Hardware: Apple M4 (10 cores); Python 3.12, numpy 2.5, scipy 1.18.
+
+## 9. Additions in v1.1
+
+### 9.1 Three more TCP structures: Shoemaker F, J, K
+
+The Dutour Sikirić dataset also contains `SpecialStructure/F-phase.cgd`, `J-phase.cgd` and `K-phase.cgd`
+(pseudo-hexagonal phases described by Shoemaker & Shoemaker). They are built with `code/shoemaker_build.py`
+(`data/tcp_shoemaker.json`) and relaxed at r = 2, 3 with the catalogue settings (`code/shoemaker_run.py`,
+archived output `results/shoemaker_phases.jsonl`).
+
+| Structure | Cells | mean faces | r = 2 | r = 3 | c∞ | above hull (9.3) |
+|---|---|---|---|---|---|---|
+| K | 82 | 13.4634 | 5.295690 | 5.295443 | 5.29525 | +0.00031 |
+| F | 52 | 13.4615 | 5.296294 | 5.296044 | 5.29584 | +0.00048 |
+| J | 22 | 13.4545 | 5.299477 | 5.299233 | 5.29904 | +0.00210 |
+
+K is now fourth, below Phys25. With them, 13 of 128 distinct topologies beat Kelvin's foam. Four other alloy
+files in `SpecialStructure/AlloysStructures` (R, X, a second ν file, H-complex) could not be used: their cells or
+coordinates do not reproduce a TCP net (for example the R-phase cell has angles 74.57°, 90°, 90° and still gives
+63 instead of 53 sites after correction).
+
+### 9.2 Non-TCP topologies by T1 moves
+
+A 3D foam with Plateau vertices is dual to a periodic triangulation: cells ↔ vertices, faces ↔ edges, foam edges ↔
+triangles, foam vertices ↔ tetrahedra. A T1 move is a Pachner 2–3 flip (a foam edge becomes a triangular face) or its
+inverse 3–2. `code/trifoam.py` stores the triangulation (tetrahedra up to lattice translation), applies flips, checks
+validity (each triangle in two tetrahedra, every edge link one cycle, every vertex link a sphere) and builds faces
+for the relaxer. Rebuilding WP and σ from the triangulation reproduces the graph-built values (r = 1: 5.290432 for
+WP, identical to 1e-8). These topologies include 3-, 4- and 7-gon faces and need not be power diagrams.
+
+**Beam search** (`code/t1search.py`, r = 1, box relaxed, results `results/t1/t1_*.jsonl.gz`): 9,808 topologies
+from WP (1×1×1 to depth 8, 2×1×1 to depth 6, 2×2×1 to depth 3), σ (depth 3) and N56 (depth 1). None was lower than
+its start. Best Δ (r = 1): WP 1×1×1 +0.0079, 2×1×1 +0.0041, 2×2×1 +0.0022, σ +0.0018, N56 +0.0009, i.e. a
+dilute single T1 costs about 0.054–0.069 (Δ × N). Cost grows about linearly with the number of flips.
+
+**Caution.** These best candidates all carry one triangular face, and on relaxation that face shrinks to zero
+area (`code/t1_diag.py`): the foam is trying to undo the T1. Their Δ therefore falls with resolution towards the
+parent value (WP 2×2×1: +0.00215, +0.00167, +0.00012 at r = 1, 2, 3), and the r2–3 extrapolation of §3 is invalid
+for them; applied blindly it gives a spurious value below WP. They are not new stable foams.
+
+**Triangle-free topologies** (`code/t1_stable.py`, results `results/t1/t1s_*.jsonl.gz`): exhaustive BFS of flip
+sequences, deduplicated by a topological fingerprint, without relaxing intermediates; only end states without
+triangular faces are relaxed. Starting from a TCP, such states occur only at odd depth.
+
+| Start | depth | triangle-free topologies | best Δ (r = 1) | Δ × N |
+|---|---|---|---|---|
+| WP 1×1×1 | 4 | 12 | +0.0264 | 0.21 |
+| WP 2×1×1 | 4 (300,000-state cap) | 8 | +0.0137 | 0.22 |
+| σ 1×1×1 | 3 | 37 | +0.0065 | 0.19 |
+
+The smallest stable non-TCP defect (flips 2–3, 2–3, 3–2; five 4-gons) costs about 0.2, three times a collapsed T1.
+WP, σ and N56 are local minima among topologies within three to four T1 moves. Limits: the fingerprint is not a
+full isomorphism test (distinct topologies may be merged), the number of cells is fixed (no T2), and depth 5 was
+not reached.
+
+### 9.3 Lower convex hull of cost against mean faces
+
+Plotting c∞ against mean faces per cell Z̄ for all 128 topologies, the lower convex hull has only three vertices:
+Z̄ = 13.333 (C15 family, 5.32421), 13.467 (σ, 5.29421) and 13.5 (A15, 5.28833). Every other structure lies above
+it (N56 +0.0011, K +0.0003). Structures with Z̄ between σ and A15 are A15/σ intergrowths such as N56, and their
+position above the hull indicates a positive interface cost. A larger TCP would have to fall well below this hull to
+beat WP. This is an empirical trend, not a proof.

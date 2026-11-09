@@ -12,6 +12,15 @@ programs give the same order at every mesh resolution: our own Python relaxer an
 This repository holds everything needed to check or dispute the result. **If you find an error, or an earlier
 computation of N56, please [open an issue](../../issues/new/choose).**
 
+**New in v1.1** (details in [REPORT.md §9](REPORT.md#9-additions-in-v11)):
+- Three more TCP structures from the same dataset, the Shoemaker F, J and K phases. **K** (82 cells, 5.29525) is
+  now fourth, after WP, N56 and σ.
+- A search over **non-TCP topologies** reached by T1 moves (Pachner flips on the dual triangulation; 3-, 4- and
+  7-gon faces allowed) from WP, σ and N56. Nothing lower than the starting structure was found. Topologies whose
+  new triangular face collapses under relaxation are not stable foams; extrapolating them gives spurious values.
+- Across all 128 topologies, cost against mean faces per cell has a lower convex hull with only three vertices:
+  C15 family, σ and A15.
+
 한국어 요약: [README.ko.md](README.ko.md)
 
 ## Main result
@@ -30,11 +39,11 @@ Surface Evolver −0.00014, −0.00018, −0.00019, −0.00019 (levels 0…3).
 **N56**: space group I4₁/amd, 76 cells per conventional cell (24 Z12, 44 Z14, 8 Z15), mean 13.474 faces per cell.
 Source file: `data/source_cgd/N56.cgd`, taken from the Zenodo dataset of Dutour Sikirić et al.
 
-## Catalogue of 125 TCP foams
+## Catalogue of TCP foams (125 in v1.0, 128 in v1.1)
 
 ![Cost versus mean faces per cell for 125 TCP foams](figures/tcp_cost_vs_faces.png)
 
-- Only **10** of the 125 distinct TCP topologies beat Kelvin's foam (5.3056).
+- Only **13** of the 128 distinct TCP topologies (10 of the original 125) beat Kelvin's foam (5.3056).
 - No enumerated TCP structure with ≤ 21 cells per fundamental domain beats Weaire–Phelan.
 - Cost tends to fall as the mean number of faces approaches 13.5, where A15 sits. Structures with more than
   13.5 faces per cell are much worse.
@@ -53,6 +62,8 @@ r = 2, 3, 4, the extrapolated value and notes for each structure. The detailed w
 | Re-run with Surface Evolver | `evolver -f surface_evolver/run.cmd surface_evolver/n56.fe` |
 | Re-run the whole catalogue | `python code/catalog.py 10` (about 6–8 h on 10 cores) |
 | Check that cells tile space | `python code/space_filling_check.py n20:N56` |
+| Re-run the T1 searches (v1.1) | `python code/t1search.py alloy:Cr3Si_A15 2x1x1 6 8 10`, `python code/t1_stable.py n20:Phys26 1x1x1 3 10` |
+| Re-run F, J, K (v1.1) | `python code/shoemaker_build.py && python code/shoemaker_run.py 2` |
 | Report an error or prior work | [Open an issue](../../issues/new/choose); see [CONTRIBUTING.md](CONTRIBUTING.md) |
 
 Reruns write to `rerun/`, so the archived results in `results/` are never overwritten.
@@ -72,7 +83,7 @@ Details and caveats: [REPORT.md](REPORT.md).
 
 ## Known limitations
 
-- Values are for **fixed topology**. High-cost structures (above about 5.40) are genuine space-filling
+- Catalogue values are for **fixed topology** (T1 neighbours of WP, σ, N56 are tested in REPORT §9.2). High-cost structures (above about 5.40) are genuine space-filling
   partitions, but they are probably unstable to T1 changes.
 - In Surface Evolver the unit cell was fixed at the shape found by our relaxer. Every level hit the 80-round
   iteration cap, so those values are slight upper bounds.
@@ -97,7 +108,7 @@ code here and can be reproduced with it.
 
 ## Citation
 
-Hyukdong Kim, *Equal-volume foam costs of all enumerated TCP structures, and the N56 foam*, v1.0.0, Zenodo (2026),
+Hyukdong Kim, *Equal-volume foam costs of all enumerated TCP structures, and the N56 foam*, Zenodo (2026). v1.0.0:
 doi:[10.5281/zenodo.24053853](https://doi.org/10.5281/zenodo.24053853).
 To cite all versions (always resolves to the latest), use doi:[10.5281/zenodo.24053852](https://doi.org/10.5281/zenodo.24053852).
 Also see [CITATION.cff](CITATION.cff).

@@ -15,7 +15,7 @@ def lattice(a, b, c, al, be, ga):
 
 
 def _sg(name):
-    for cand in (name + ':2', name + ':H', name):  # Systre: origin choice 2, hexagonal axes
+    for cand in ((name + ':R', name + ':2', name + ':H', name) if name.startswith('R') else (name + ':2', name + ':H', name)):  # Systre: origin choice 2, hexagonal axes
         try:
             sg = gemmi.find_spacegroup_by_name(cand)
             if sg is not None:
@@ -23,6 +23,13 @@ def _sg(name):
         except Exception:
             pass
     raise ValueError('unknown group ' + name)
+
+
+def _num(x):
+    """Accept fractional coordinates written as '1/3'."""
+    if '/' in x:
+        a, b = x.split('/'); return float(a) / float(b)
+    return float(x)
 
 
 def read(path):
@@ -44,10 +51,10 @@ def read(path):
         elif t[0] == 'end':
             pass
         elif t[0] == 'atom':
-            cur['atoms'].append((int(t[2]), [float(x) for x in t[3:6]]))
+            cur['atoms'].append((int(t[2]), [_num(x) for x in t[3:6]]))
             cur['edges'].append([])
         elif t[0] == 'edge':
-            cur['edges'][-1].append([float(x) for x in t[2:5]])
+            cur['edges'][-1].append([_num(x) for x in t[2:5]])
     return out
 
 
