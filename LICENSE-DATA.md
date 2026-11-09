@@ -9,6 +9,10 @@ Copyright (c) 2026 Hyukdong Kim.
 
 ## Third-party material
 
+`data/source_cif/*.cif` are unmodified files from the Crystallography Open Database (https://www.crystallography.net/,
+COD 2310299, 2310312, 2311049). The original data were provided by IUCr Journals; please cite the journal articles
+named in each file. `data/tcp_cif.json` is derived from them.
+
 `data/source_cgd/*.cgd` are unmodified files, and `data/tcp_all.json` and the topologies in
 `surface_evolver/*.fe` are adapted, from:
 

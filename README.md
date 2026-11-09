@@ -12,6 +12,12 @@ programs give the same order at every mesh resolution: our own Python relaxer an
 This repository holds everything needed to check or dispute the result. **If you find an error, or an earlier
 computation of N56, please [open an issue](../../issues/new/choose).**
 
+**New in v1.2** (details in [REPORT.md §10](REPORT.md#10-additions-in-v12)):
+- The R and P phases from crystal structures (COD). **P** (56 cells, 5.30397) is the lowest structure with its
+  mean face count and 12th overall; R is above Kelvin. 130 topologies, 14 beat Kelvin.
+- An exhaustive T1 enumeration with a finer duplicate test: WP is lower than every triangle-free topology within
+  five T1 moves (8-cell cell), four (16-cell) and three (32-cell); σ within three.
+
 **New in v1.1** (details in [REPORT.md §9](REPORT.md#9-additions-in-v11)):
 - Three more TCP structures from the same dataset, the Shoemaker F, J and K phases. **K** (82 cells, 5.29525) is
   now fourth, after WP, N56 and σ.
@@ -39,11 +45,11 @@ Surface Evolver −0.00014, −0.00018, −0.00019, −0.00019 (levels 0…3).
 **N56**: space group I4₁/amd, 76 cells per conventional cell (24 Z12, 44 Z14, 8 Z15), mean 13.474 faces per cell.
 Source file: `data/source_cgd/N56.cgd`, taken from the Zenodo dataset of Dutour Sikirić et al.
 
-## Catalogue of TCP foams (125 in v1.0, 128 in v1.1)
+## Catalogue of TCP foams (125 in v1.0, 128 in v1.1, 130 in v1.2)
 
 ![Cost versus mean faces per cell for 125 TCP foams](figures/tcp_cost_vs_faces.png)
 
-- Only **13** of the 128 distinct TCP topologies (10 of the original 125) beat Kelvin's foam (5.3056).
+- Only **14** of the 130 distinct TCP topologies (10 of the original 125) beat Kelvin's foam (5.3056).
 - No enumerated TCP structure with ≤ 21 cells per fundamental domain beats Weaire–Phelan.
 - Cost tends to fall as the mean number of faces approaches 13.5, where A15 sits. Structures with more than
   13.5 faces per cell are much worse.
@@ -64,6 +70,8 @@ r = 2, 3, 4, the extrapolated value and notes for each structure. The detailed w
 | Check that cells tile space | `python code/space_filling_check.py n20:N56` |
 | Re-run the T1 searches (v1.1) | `python code/t1search.py alloy:Cr3Si_A15 2x1x1 6 8 10`, `python code/t1_stable.py n20:Phys26 1x1x1 3 10` |
 | Re-run F, J, K (v1.1) | `python code/shoemaker_build.py && python code/shoemaker_run.py 2` |
+| Re-run R, P (v1.2) | `python code/cif_build.py && python code/shoemaker_run.py 2 data/tcp_cif.json rerun/cif_phases.jsonl` |
+| Re-run the exhaustive T1 enumeration (v1.2) | `python code/t1_deep.py alloy:Cr3Si_A15 1x1x1 5 10` |
 | Report an error or prior work | [Open an issue](../../issues/new/choose); see [CONTRIBUTING.md](CONTRIBUTING.md) |
 
 Reruns write to `rerun/`, so the archived results in `results/` are never overwritten.
@@ -105,6 +113,8 @@ code here and can be reproduced with it.
 - The structure topologies come from M. Dutour Sikirić (2024),
   *Dataset and programs for the work on space-fullerenes*, Zenodo 13691342, CC BY 4.0. The files in
   `data/source_cgd/` and the derived `data/tcp_all.json` are adapted from that dataset.
+- `data/source_cif/` holds crystal structures from the [Crystallography Open Database](https://www.crystallography.net/)
+  (COD 2310299, 2310312, 2311049; original data from IUCr Journals, see the references in each file).
 
 ## Citation
 
