@@ -164,7 +164,8 @@ for them; applied blindly it gives a spurious value below WP. They are not new s
 
 **Triangle-free topologies** (`code/t1_stable.py`, results `results/t1/t1s_*.jsonl.gz`): exhaustive BFS of flip
 sequences, deduplicated by a topological fingerprint, without relaxing intermediates; only end states without
-triangular faces are relaxed. Starting from a TCP, such states occur only at odd depth.
+triangular faces are relaxed. (v1.1.0 said such states occur only at odd depth; that is wrong: WP 1×1×1 has
+6 triangle-free states at depth 3 and 6 more at depth 4.)
 
 | Start | depth | triangle-free topologies | best Δ (r = 1) | Δ × N |
 |---|---|---|---|---|
@@ -174,8 +175,9 @@ triangular faces are relaxed. Starting from a TCP, such states occur only at odd
 
 The smallest stable non-TCP defect (flips 2–3, 2–3, 3–2; five 4-gons) costs about 0.2, three times a collapsed T1.
 WP, σ and N56 are local minima among topologies within three to four T1 moves. Limits: the fingerprint is not a
-full isomorphism test (distinct topologies may be merged), the number of cells is fixed (no T2), and depth 5 was
-not reached.
+full isomorphism test (distinct topologies may be merged), the number of cells is fixed (no T2), depth 5 was
+not reached, and the WP 2×1×1 depth-4 level was cut by the state cap, so its depth-4 triangle-free states are
+incomplete.
 
 ### 9.3 Lower convex hull of cost against mean faces
 
