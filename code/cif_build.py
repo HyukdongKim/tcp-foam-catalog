@@ -12,7 +12,8 @@ HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from trifoam import from_delaunay, from_tcp
 from t1_deep import wl_hash
 
-SOURCES = [('cif:R-phase', '2310299.cif'), ('cif:P-phase', '2310312.cif'), ('cif:P-phase_b', '2311049.cif')]
+SOURCES = [('cif:R-phase', '2310299.cif'), ('cif:P-phase', '2310312.cif'), ('cif:P-phase_b', '2311049.cif'),
+           ('cif:M-phase', 'M_phase_NbNiAl_Shoemaker1967.cif')]
 HEX_TO_RHOMB = np.array([[2 / 3, 1 / 3, 1 / 3], [-1 / 3, 1 / 3, 1 / 3], [-1 / 3, -2 / 3, 1 / 3]])
 
 
@@ -44,7 +45,9 @@ def record(name, fn):
     for u, v in f.edge:
         n = tuple(int(x) for x in np.subtract(v[1], u[1]))
         S[u[0]].add((v[0], n)); S[v[0]].add((u[0], tuple(-x for x in n)))
-    return dict(name=name, group=st.spacegroup_hm, source='COD ' + os.path.basename(fn)[:-4], N=len(F), meanZ=float(np.mean(Z)),
+    src = os.path.basename(fn)[:-4]
+    src = 'COD ' + src if src.isdigit() else 'Shoemaker & Shoemaker (1967), Table 2'
+    return dict(name=name, group=st.spacegroup_hm, source=src, N=len(F), meanZ=float(np.mean(Z)),
                 F=F.tolist(), H=H.tolist(), Z=Z, S=[sorted([int(j), list(n)] for j, n in s) for s in S])
 
 

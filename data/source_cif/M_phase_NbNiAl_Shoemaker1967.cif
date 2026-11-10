@@ -1,0 +1,80 @@
+#------------------------------------------------------------------------------
+# M phase, Nb-Ni-Al  (nominal Nb48Ni39Al13)
+# Source: C. B. Shoemaker & D. P. Shoemaker, Acta Cryst. (1967) 23, 231-238
+#         doi:10.1107/S0365110X6700252X
+# Coordinates and B from Table 2 of the paper (single-crystal X-ray, R = 0.115).
+#
+# Notes:
+#  * Space group as published: Pnam (non-standard setting of Pnma, No. 62),
+#    mirror planes perpendicular to c at z = 1/4, 3/4.
+#  * Sites I-VI (C.N.14/15/16) are Nb.
+#  * C.N.12 sites (VII-XI) are a Ni/Al mixture. The paper gives f0 consistent
+#    with ~0.75 Ni + 0.25 Al; that ratio is used here for all C.N.12 sites.
+#    Site VII scatters more strongly (Ni-rich or some Nb), see the paper.
+#  * Resulting cell content: Nb24 Ni21 Al7 (52 atoms), cf. nominal Nb25Ni20.3Al6.8.
+#  * Uiso = B / (8 pi^2).
+#------------------------------------------------------------------------------
+data_M_phase_NbNiAl
+
+_chemical_name_common             'M phase, Nb-Ni-Al'
+_chemical_formula_sum             'Al7 Nb24 Ni21'
+_journal_name_full                'Acta Crystallographica'
+_journal_year                     1967
+_journal_volume                   23
+_journal_page_first               231
+_journal_page_last                238
+_publ_section_title
+'The crystal structure of the M phase, Nb-Ni-Al'
+loop_
+_publ_author_name
+'Shoemaker, Clara Brink'
+'Shoemaker, David P.'
+
+_cell_length_a                    9.303
+_cell_length_b                    16.266
+_cell_length_c                    4.933
+_cell_angle_alpha                 90
+_cell_angle_beta                  90
+_cell_angle_gamma                 90
+_cell_formula_units_Z             1
+
+_symmetry_space_group_name_H-M    'P n a m'
+_space_group_IT_number            62
+
+loop_
+_symmetry_equiv_pos_as_xyz
+'x, y, z'
+'-x+1/2, y+1/2, -z'
+'-x, -y, z+1/2'
+'x+1/2, -y+1/2, -z+1/2'
+'-x, -y, -z'
+'x+1/2, -y+1/2, z'
+'x, y, -z+1/2'
+'-x+1/2, y+1/2, z+1/2'
+
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_symmetry_multiplicity
+_atom_site_Wyckoff_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+_atom_site_U_iso_or_equiv
+Nb1    Nb  4  c  0.0593  0.1494  0.25     1.00  0.0080
+Nb2    Nb  4  c  0.2996  0.3984  0.25     1.00  0.0106
+Nb3    Nb  4  c  0.5242  0.5410  0.25     1.00  0.0111
+Nb4    Nb  4  c  0.6164  0.7068  0.25     1.00  0.0111
+Nb5    Nb  4  c  0.0144  0.4482  0.25     1.00  0.0151
+Nb6    Nb  4  c  0.8388  0.2938  0.25     1.00  0.0144
+Ni7    Ni  4  c  0.0714  0.6225  0.25     0.75  0.0091
+Al7    Al  4  c  0.0714  0.6225  0.25     0.25  0.0091
+Ni8    Ni  4  c  0.3255  0.6697  0.25     0.75  0.0098
+Al8    Al  4  c  0.3255  0.6697  0.25     0.25  0.0098
+Ni9    Ni  4  c  0.8168  0.5778  0.25     0.75  0.0084
+Al9    Al  4  c  0.8168  0.5778  0.25     0.25  0.0084
+Ni10   Ni  8  d  0.1118  0.2951  0.0048   0.75  0.0080
+Al10   Al  8  d  0.1118  0.2951  0.0048   0.25  0.0080
+Ni11   Ni  8  d  0.2550  0.5450  -0.0031  0.75  0.0095
+Al11   Al  8  d  0.2550  0.5450  -0.0031  0.25  0.0095

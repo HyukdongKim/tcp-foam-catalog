@@ -229,3 +229,44 @@ lower than every triangle-free topology within five T1 moves in its 8-cell cell,
 in the 32-cell cell; σ is lower than every one within three. Limits: the WL hash can in principle merge
 non-isomorphic topologies; cell number is fixed; values are r = 1 (all Δ are far above the r = 1 bias of about
 0.002, and no candidate needed re-checking at higher resolution).
+
+## 11. Additions in v1.3
+
+### 11.1 M phase
+
+The M phase (Nb–Ni–Al, Pnam, 52 sites) is not in COD. Its sites were transcribed from Table 2 of
+C. B. Shoemaker & D. P. Shoemaker, Acta Cryst. 23 (1967) 231 (`data/source_cif/M_phase_NbNiAl_Shoemaker1967.cif`)
+and built with `code/cif_build.py` as in §10.1. The coordination numbers (12: 28, 14: 8, 15: 8, 16: 8) match the
+paper's site assignment. It has the composition and cell size of E02 but a different topology (WL hash).
+
+| Structure | Cells | mean faces | r = 2 | r = 3 | c∞ | above hull |
+|---|---|---|---|---|---|---|
+| M | 52 | 13.3846 | 5.315028 | 5.314848 | 5.31471 | +0.0020 |
+
+M lies slightly above μ (5.31391, same mean faces) and above Kelvin; 41st of 131 distinct topologies.
+
+### 11.2 WP 2×1×1 to depth 5
+
+`code/t1_deep.py alloy:Cr3Si_A15 2x1x1 5 10` (about 15.5 h on 10 cores) enumerated 1,017,431 states at depth 4.
+Triangle-free topologies: 102 (17 at depth 3, 18 at depth 4, 67 at depth 5), all valid. Best Δ (r = 1): +0.0137
+(depth 3, Δ × N = 0.22), +0.0412 (depth 4), +0.0185 (depth 5, 0.30). `results/t1/t1d_Cr3Si_A15_2x1x1_r1.jsonl.gz`
+now holds this run (it supersedes the depth-4 file of v1.2, whose depth-3 and depth-4 entries it reproduces). WP is
+therefore lower than every triangle-free topology within five T1 moves in both the 8-cell and the 16-cell cell.
+
+### 11.3 T2-type moves (cell number ±1)
+
+`code/t2_probe.py` inserts one cell centre (at a foam vertex, a foam-edge centroid or a face centre) or deletes one
+cell, re-derives the Voronoi topology of the points by periodic Delaunay and relaxes all N ± 1 cells at equal volume
+(r = 1). The three lowest WP 2×1×1 insertion states were then rearranged by exhaustive T1 enumeration to depth 3
+(`t1_deep.py file:…`, triangle-free end states only). Results: `results/t2/`.
+
+| Start | topologies | best | defect energy (c − c_WP) × N |
+|---|---|---|---|
+| WP 1×1×1, insert/delete | 10 | insert at edge | +0.87 |
+| WP 2×1×1, insert/delete | 30 | insert at edge | +0.87 |
+| WP 2×1×1 insertion + T1 to depth 2 | 15 (3 starts) | 5.33646 | +0.78 |
+| WP 2×1×1 insertion + T1 to depth 3 | 157 (3 starts) | 5.33646 | +0.78 |
+
+Deletions are worse than insertions. An inserted cell costs about +0.78 after rearrangement, roughly four times the
+minimal T1 defect, and depth 3 does not improve on depth 2. These are T2-type changes built from point sets plus
+local T1 moves, not a continuous T2 transition; larger rearrangements remain unexplored.
