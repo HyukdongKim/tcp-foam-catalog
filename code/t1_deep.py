@@ -2,7 +2,8 @@
 Deduplication by a Weisfeiler-Lehman hash of the quotient graph (cells, edges labelled by polygon size),
 which is finer than TriFoam.signature(); symmetric/translated copies always merge.
 Triangle-free states (no 3-gon faces) occur only at odd depth from a TCP start.
-usage: python t1_deep.py START REPS DEPTH WORKERS [r=1] [maxlevel=3000000]
+usage: python code/t1_deep.py START REPS DEPTH WORKERS [r=1] [maxlevel=3000000]
+  START = name in data/tcp_all.json, or file:PATH:LINE for a stored state (e.g. a line of results/t2/t2p_*.jsonl.gz)
 writes rerun/t1d_<tag>.jsonl (relaxed triangle-free states) and rerun/t1d_<tag>_stable.pkl."""
 import sys, os, json, time, warnings, pickle, zlib
 from collections import defaultdict, Counter
@@ -74,8 +75,18 @@ def main():
     reps = tuple(int(x) for x in reps.split('x'))
     os.chdir(os.path.join(HERE, '..')); os.makedirs('rerun', exist_ok=True)
     tag = f"{start.split(':')[-1]}_{'x'.join(map(str, reps))}_r{r}"
-    R = {d['name']: d for d in json.load(open('data/tcp_all.json'))}
-    f0 = from_tcp(R[start]).supercell(reps)
+    if start.startswith('file:'):          # file:PATH:LINE -> start from a stored triangulation (tets, X, H)
+        _, path, line = start.split(':')
+        import gzip
+        op = gzip.open if path.endswith('.gz') else open
+        rec = [json.loads(l) for l in op(path, 'rt')][int(line)]
+        from t1search import deser
+        f0 = TriFoam(np.array(rec['X']), np.array(rec['H']), deser(rec['tets'])).supercell(reps)
+        base = os.path.basename(path).replace('.gz', '')[:-6]
+        tag = f"{base}_L{line}_{'x'.join(map(str, reps))}_r{r}"
+    else:
+        R = {d['name']: d for d in json.load(open('data/tcp_all.json'))}
+        f0 = from_tcp(R[start]).supercell(reps)
     seen = {wl_hash(f0)}
     level = [(pack(f0.tets), [])]
     stable = {}

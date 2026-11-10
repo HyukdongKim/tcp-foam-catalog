@@ -1,9 +1,9 @@
-cff-version: 1.2.0
+cff-version: 1.3.0
 message: "If you use these data or code, please cite them as below, and cite the space-fullerene enumeration (references)."
 title: "Equal-volume foam costs of all enumerated TCP structures, and the N56 foam"
 authors:
   - name: "Hyukdong Kim"
-version: 1.2.0
+version: 1.3.0
 doi: 10.5281/zenodo.24053852
 identifiers:
   - type: doi
@@ -18,7 +18,7 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.24053853
     description: "Version 1.0.0"
-date-released: 2026-11-09
+date-released: 2026-11-10
 license: [MIT, CC-BY-4.0]
 repository-code: "https://github.com/HyukdongKim/tcp-foam-catalog"
 keywords: [Kelvin problem, foam, Weaire-Phelan, Frank-Kasper, tetrahedrally close-packed, Surface Evolver]
